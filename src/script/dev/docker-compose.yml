@@ -1,0 +1,27 @@
+version: '3.7'
+
+services:
+  
+  mysql:
+    image: mysql:5.7
+    container_name: mysql-dev
+    environment:
+        MYSQL_ROOT_PASSWORD: devpass123
+        MYSQL_USER: dev1
+        MYSQL_HOST: '%'
+        MYSQL_PASSWORD: dev1
+        MYSQL_DATABASE: envisu4
+       
+        TZ: UTC
+    volumes:
+      - mysqldata2:/var/lib/mysql
+    ports:
+      - 3318:3306
+    networks:
+      - devnet
+      
+volumes:
+  mysqldata2:
+  
+networks:
+  devnet:

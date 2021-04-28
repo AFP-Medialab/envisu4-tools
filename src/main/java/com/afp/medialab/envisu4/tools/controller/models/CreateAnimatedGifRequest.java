@@ -1,0 +1,33 @@
+package com.afp.medialab.envisu4.tools.controller.models;
+
+import java.util.Set;
+
+import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
+public class CreateAnimatedGifRequest {
+
+	@NotNull(message = "keywords are mandatory")
+	private Set<String> inputURLs;
+	
+	private int delay;
+
+	public int getDelay() {
+		return delay;
+	}
+
+	public void setDelay(int delay) {
+		this.delay = delay;
+	}
+
+	public Set<String> getInputURLs() {
+		return inputURLs;
+	}
+
+	public void setInputURLs(Set<String> inputURLs) {
+		this.inputURLs = inputURLs;
+	}
+
+}

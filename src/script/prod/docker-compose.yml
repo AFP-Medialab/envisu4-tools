@@ -1,0 +1,47 @@
+version: '3.7'
+
+services:
+  
+  mysql:
+    image: mysql:5.7
+    container_name: mysql
+    restart: on-failure
+    environment:
+        MYSQL_ROOT_PASSWORD: devpass123
+        MYSQL_USER: dev1
+        MYSQL_PASSWORD: dev1
+        MYSQL_DATABASE: envisu4
+        TZ: UTC
+    volumes:
+      - mysqldata2:/var/lib/mysql
+    ports:
+      - 3318:3306
+    networks:
+      - esnet
+      
+  twint-wrapper:
+    image: envisu4-tools:0.1
+    container_name: envisu4-tools
+    restart: on-failure
+    depends_on:
+      - mysql
+    networks:
+      - esnet
+    ports:
+      - 8283:8080
+    environment:
+      MYSQL_URL_ENV: "jdbc:mysql://mysql:3306/envisu4?serverTimezone=UTC&useSSL=false"
+      PROFILE: prod
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "200k"
+        labels: "envisu4-tools"
+  
+      
+volumes:
+  mysqldata2: {}
+ 
+networks:
+  esnet:
+  
