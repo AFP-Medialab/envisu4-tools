@@ -18,6 +18,7 @@ public class WebConfig implements WebMvcConfigurer {
 	private ListableBeanFactory beanFactory;
 
 	//@Override
+	@SuppressWarnings("rawtypes")
 	public void addFormatters(FormatterRegistry registry) {
 		Map<String, Object> components = beanFactory.getBeansWithAnnotation(RequestParameterConverter.class);
 		components.values().parallelStream().forEach(c -> {

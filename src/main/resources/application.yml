@@ -9,6 +9,15 @@ logging:
 application:
   ipol:
     endpoint: ${IPOL_ENDPOINT:https://ipolcore.ipol.im}
+    demo_id: ${IPOL_DEMO_ID:77777000125}
+  animatedgif:
+    delay: ${DEFAULT_DELAY:500}
+  notification:
+    slack: ${SLACK_URL:}
+  actuator:
+    user: ${ACTUATOR_USER:actuator}
+    #password is generate with GeneratePassword class default is "actuator"
+    passwd: ${ACTUATOR_PASSWORD:{bcrypt}$2a$10$haLsRQkZdhF1FtzV4iXFi.MiPOlDKN.i4FaWrjitA3eDFwoWeuMa2}
          
 spring:
   application:
@@ -28,7 +37,15 @@ spring:
     multipart:
       enabled: true
       max-file-size: 1000KB
-      location: ${java.io.tmpdir}
+      location: ${java.io.tmpdir} 
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${FUSIONAUTH_ISSUER:weverify.eu}
+          jwk-set-uri: ${FUSIONAUTH_URL:http://localhost:9011}/.well-known/jwks.json
+
+  
 management:
   endpoints:
     enabled-by-default: false
